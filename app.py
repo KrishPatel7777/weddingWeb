@@ -20,12 +20,12 @@ admins_collection = db['admins']
 def create_admin():
     if admins_collection.count_documents({}) == 0:
         admin_user = {
-            'username': 'Parampara',
-            'password': generate_password_hash('Parampara@risergroup'),  # Change this password!
+            'username': 'admin',
+            'password': generate_password_hash('admin123'),  # Change this password!
             'created_at': datetime.now()
         }
         admins_collection.insert_one(admin_user)
-        print("Admin user created: username=Parampara, password=Parampara@risergroup")
+        print("Admin user created: username=admin, password=admin123")
 
 create_admin()
 
