@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin Panel</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin.css') }}">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Parampara</h2>
+                <p>Admin Panel</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('admin_dashboard') }}" class="nav-link active">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="{{ url_for('admin_contacts') }}" class="nav-link">
+                    <span class="icon">📋</span> Contact Enquiries
+                </a>
+                <a href="{{ url_for('admin_logout') }}" class="nav-link logout">
+                    <span class="icon">🚪</span> Logout
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Welcome, {{ session.admin_username }}</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Dashboard</h1>
+            </header>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📧</div>
+                    <div class="stat-info">
+                        <h3>{{ total_contacts }}</h3>
+                        <p>Total Enquiries</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🆕</div>
+                    <div class="stat-info">
+                        <h3>{{ new_enquiries }}</h3>
+                        <p>New Enquiries</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <h3>{{ total_contacts - new_enquiries }}</h3>
+                        <p>Contacted</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💍</div>
+                    <div class="stat-info">
+                        <h3>{{ enquiries_by_type|length }}</h3>
+                        <p>Event Types</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Types Breakdown -->
+            <div class="card">
+                <h2>Enquiries by Event Type</h2>
+                <div class="event-types">
+                    {% for event in enquiries_by_type %}
+                        <div class="event-type-item">
+                            <span class="event-name">{{ event._id }}</span>
+                            <span class="event-count">{{ event.count }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Latest Enquiries -->
+            <div class="card">
+                <h2>Latest Enquiries</h2>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Event Type</th>
+                                <th>Event Date</th>
+                                <th>City</th>
+                                <th>Status</th>
+                                <th>Submitted</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contact in latest_enquiries %}
+                                <tr>
+                                    <td>{{ contact.fullName }}</td>
+                                    <td>{{ contact.phone }}</td>
+                                    <td>{{ contact.eventType }}</td>
+                                    <td>{{ contact.eventDate }}</td>
+                                    <td>{{ contact.eventCity }}</td>
+                                    <td>
+                                        <span class="badge badge-{{ 'success' if contact.status == 'contacted' else 'warning' }}">
+                                            {{ contact.status|default('new')|title }}
+                                        </span>
+                                    </td>
+                                    <td>{{ contact.created_at.strftime('%d %b %Y') }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('admin_contacts') }}" class="btn-primary">View All Enquiries</a>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
