@@ -136,11 +136,11 @@ def admin_contacts():
     
     # Build sort
     if sort_by == 'latest':
-    contacts = list(contacts_collection.find(query).sort('created_at', -1))
-elif sort_by == 'oldest':
-    contacts = list(contacts_collection.find(query).sort('created_at', 1))
-elif sort_by == 'name':
-    contacts = list(contacts_collection.find(query).sort('fullName', 1))
+        contacts = list(contacts_collection.find(query).sort('created_at', -1))
+    elif sort_by == 'oldest':
+        contacts = list(contacts_collection.find(query).sort('created_at', 1))
+    elif sort_by == 'name':
+        contacts = list(contacts_collection.find(query).sort('fullName', 1))
 
     
     return render_template('admin/contacts.html', 
