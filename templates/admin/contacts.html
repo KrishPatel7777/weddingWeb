@@ -99,7 +99,9 @@
                                         <td>{{ contact.eventCity }}</td>
                                         <td><span class="event-tag">{{ contact.eventType }}</span></td>
                                         <td>{{ contact.guestCount }}</td>
-                                        <td class="description-cell">{{ contact.description[:50] }}{% if contact.description|length > 50 %}...{% endif %}</td>
+                                        <td class="description-cell" onclick="this.classList.toggle('expanded')">
+                                            {{ contact.description }}
+                                        </td>   
                                         <td>
                                             <span class="badge badge-{{ 'success' if contact.status == 'contacted' else 'warning' }}">
                                                 {{ contact.status|default('new')|title }}

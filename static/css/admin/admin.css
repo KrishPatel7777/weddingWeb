@@ -571,3 +571,16 @@ body {
         gap: 15px;
     }
 }
+
+.description-cell {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.description-cell.expanded {
+    white-space: normal;
+    overflow: visible;
+}
