@@ -105,7 +105,13 @@
                                                 {{ contact.status|default('new')|title }}
                                             </span>
                                         </td>
-                                        <td>{{ contact.created_at.strftime('%d %b %Y, %H:%M') }}</td>
+                                        <td>
+                                            {% if contact.created_at %}
+                                                {{ contact.created_at.strftime('%d %b %Y, %H:%M') }}
+                                            {% else %}
+                                                N/A
+                                            {% endif %}
+                                        </td>
                                         <td>
                                             <div class="action-buttons">
                                                 {% if contact.status != 'contacted' %}

@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = 'parampara-wedding-planner-2026-secret-key-change-this'
 
 # MongoDB Atlas Connection
-MONGO_URI = 'mongodb+srv://parampara_admin:ParamparaRiser123@parampara-cluster.ho0inu5.mongodb.net/parampara_db?retryWrites=true&w=majority'  # Replace with your actual MongoDB URI
+MONGO_URI = os.environ.get("MONGO_URI")
 client = MongoClient(MONGO_URI)
 db = client['parampara_db']
 contacts_collection = db['contacts']
@@ -170,7 +170,7 @@ def mark_contacted(contact_id):
     try:
         result = contacts_collection.update_one(
             {'_id': ObjectId(contact_id)},
-            {'$set': {'status': 'new'}, '$unset': {'contacted_at': ''}}
+            {'$set': {'status': 'contacted', 'contacted_at': datetime.now()}}
         )
         if result.modified_count > 0:
             flash('Enquiry marked as contacted', 'success')
@@ -178,7 +178,7 @@ def mark_contacted(contact_id):
             flash('Enquiry not found or already contacted', 'warning')
     except Exception as e:
         flash(f'Error updating enquiry: {str(e)}', 'danger')
-    
+
     return redirect(url_for('admin_contacts'))
 
 @app.route('/admin/contacts/mark-new/<contact_id>', methods=['POST'])
