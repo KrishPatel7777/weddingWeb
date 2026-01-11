@@ -110,11 +110,11 @@
                         <tbody>
                             {% for contact in latest_enquiries %}
                                 <tr>
-                                    <td>{{ contact.fullName }}</td>
-                                    <td>{{ contact.phone }}</td>
-                                    <td>{{ contact.eventType }}</td>
-                                    <td>{{ contact.eventDate }}</td>
-                                    <td>{{ contact.eventCity }}</td>
+                                    <td data-label="Full Name">{{ contact.fullName }}</td>
+                                    <td data-label="Phone">{{ contact.phone }}</td>
+                                    <td data-label="Event Type">{{ contact.eventType }}</td>
+                                    <td data-label="Event Date">{{ contact.eventDate }}</td>
+                                    <td  data-label="Event City">{{ contact.eventCity }}</td>
                                     <td>
                                         <span class="badge badge-{{ 'success' if contact.status == 'contacted' else 'warning' }}">
                                             {{ contact.status|default('new')|title }}
