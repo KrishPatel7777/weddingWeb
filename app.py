@@ -16,19 +16,6 @@ db = client['parampara_db']
 contacts_collection = db['contacts']
 admins_collection = db['admins']
 
-# Create admin user if not exists (Run this once)
-def create_admin():
-    if admins_collection.count_documents({}) == 0:
-        admin_user = {
-            'username': 'admin',
-            'password': generate_password_hash('admin123'),  # Change this password!
-            'created_at': datetime.now()
-        }
-        admins_collection.insert_one(admin_user)
-        print("Admin user created: username=admin, password=admin123")
-
-create_admin()
-
 # Login required decorator
 def login_required(f):
     @wraps(f)
