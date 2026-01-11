@@ -114,13 +114,13 @@
                                     <td data-label="Phone">{{ contact.phone }}</td>
                                     <td data-label="Event Type">{{ contact.eventType }}</td>
                                     <td data-label="Event Date">{{ contact.eventDate }}</td>
-                                    <td  data-label="Event City">{{ contact.eventCity }}</td>
-                                    <td>
+                                    <td data-label="Event City">{{ contact.eventCity }}</td>
+                                    <td data-label="Status">
                                         <span class="badge badge-{{ 'success' if contact.status == 'contacted' else 'warning' }}">
                                             {{ contact.status|default('new')|title }}
                                         </span>
                                     </td>
-                                    <td>{{ contact.created_at.strftime('%d %b %Y') }}</td>
+                                    <td data-label="Submit Date">{{ contact.created_at.strftime('%d %b %Y') }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>

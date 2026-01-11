@@ -399,7 +399,6 @@ body {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
-    table-layout: fixed;
 }
 
 .data-table thead {
@@ -418,6 +417,9 @@ body {
     padding: 15px 12px;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-light);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
 }
 
 .data-table tbody tr {
