@@ -564,6 +564,10 @@ body {
         align-items: flex-start;
         gap: 15px;
     }
+    .description-cell.expanded {
+        max-height: 120px;
+        overflow-y: auto;
+    }
 }
 
 .description-cell {
