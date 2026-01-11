@@ -92,41 +92,44 @@
                             {% if contacts %}
                                 {% for contact in contacts %}
                                     <tr class="contact-row {% if contact.status == 'contacted' %}contacted{% endif %}">
-                                        <td><strong>{{ contact.fullName }}</strong></td>
-                                        <td>{{ contact.phone }}</td>
-                                        <td>{{ contact.email or 'N/A' }}</td>
-                                        <td>{{ contact.eventDate }}</td>
-                                        <td>{{ contact.eventCity }}</td>
-                                        <td><span class="event-tag">{{ contact.eventType }}</span></td>
-                                        <td>{{ contact.guestCount }}</td>
-                                        <td class="description-cell" onclick="this.classList.toggle('expanded')">
+                                        <td data-label="Full Name"><strong>{{ contact.fullName }}</strong></td>
+                                        <td data-label="Phone">{{ contact.phone }}</td>
+                                        <td data-label="Email">{{ contact.email or 'N/A' }}</td>
+                                        <td data-label="Event Date">{{ contact.eventDate }}</td>
+                                        <td data-label="City">{{ contact.eventCity }}</td>
+                                        <td data-label="Event Type">
+                                            <span class="event-tag">{{ contact.eventType }}</span>
+                                        </td>
+                                        <td data-label="Guests">{{ contact.guestCount }}</td>
+                                        <td data-label="Description" class="description-cell"
+                                            onclick="this.classList.toggle('expanded')">
                                             {{ contact.description }}
-                                        </td>   
-                                        <td>
+                                        </td>
+                                        <td data-label="Status">
                                             <span class="badge badge-{{ 'success' if contact.status == 'contacted' else 'warning' }}">
                                                 {{ contact.status|default('new')|title }}
                                             </span>
                                         </td>
-                                        <td>
+                                        <td data-label="Submitted">
                                             {% if contact.created_at %}
                                                 {{ contact.created_at.strftime('%d %b %Y, %H:%M') }}
                                             {% else %}
                                                 N/A
                                             {% endif %}
                                         </td>
-                                        <td>
+                                        <td data-label="Actions">
                                             <div class="action-buttons">
                                                 {% if contact.status != 'contacted' %}
-                                                    <form method="POST" action="{{ url_for('mark_contacted', contact_id=contact._id) }}" style="display: inline;">
-                                                        <button type="submit" class="btn-action btn-success" title="Mark as Contacted">✓</button>
+                                                    <form method="POST" action="{{ url_for('mark_contacted', contact_id=contact._id) }}">
+                                                        <button type="submit" class="btn-action btn-success">✓</button>
                                                     </form>
                                                 {% else %}
-                                                    <form method="POST" action="{{ url_for('mark_new', contact_id=contact._id) }}" style="display: inline;">
-                                                        <button type="submit" class="btn-action btn-warning" title="Mark as New">↺</button>
+                                                    <form method="POST" action="{{ url_for('mark_new', contact_id=contact._id) }}">
+                                                        <button type="submit" class="btn-action btn-warning">↺</button>
                                                     </form>
                                                 {% endif %}
-                                                <form method="POST" action="{{ url_for('delete_contact', contact_id=contact._id) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this enquiry?');">
-                                                    <button type="submit" class="btn-action btn-danger" title="Delete">×</button>
+                                                <form method="POST" action="{{ url_for('delete_contact', contact_id=contact._id) }}">
+                                                    <button type="submit" class="btn-action btn-danger">×</button>
                                                 </form>
                                             </div>
                                         </td>
