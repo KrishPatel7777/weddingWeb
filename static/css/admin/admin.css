@@ -399,6 +399,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
+    table-layout: fixed;
 }
 
 .data-table thead {
@@ -429,13 +430,6 @@ body {
 
 .data-table tbody tr.contacted {
     opacity: 0.7;
-}
-
-.description-cell {
-    max-width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .event-tag {
@@ -574,13 +568,16 @@ body {
 
 .description-cell {
     max-width: 250px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
 }
 
+/* Expanded state */
 .description-cell.expanded {
     white-space: normal;
-    overflow: visible;
+    overflow: hidden;
 }
