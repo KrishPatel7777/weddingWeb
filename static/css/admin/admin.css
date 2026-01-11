@@ -417,6 +417,8 @@ body {
     padding: 15px 12px;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-light);
+}
+.contacts-table td[data-label="Email"] {
     word-break: break-word;
     overflow-wrap: anywhere;
     white-space: normal;
@@ -566,6 +568,11 @@ body {
         align-items: flex-start;
         gap: 15px;
     }
+    .description-cell {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     .description-cell.expanded {
         max-height: 120px;
         overflow-y: auto;
@@ -601,6 +608,11 @@ body {
         display: block;
         width: 100%;
     }
+    .event-tag,
+    .badge {
+        white-space: nowrap;
+        align-self: flex-start;
+    }
 
     .data-table tr {
         background: var(--dark-bg);
@@ -612,10 +624,10 @@ body {
 
     .data-table td {
         display: flex;
+        align-items: flex-start;
         justify-content: space-between;
+        gap: 12px;
         padding: 10px;
-        border: none;
-        border-bottom: 1px solid var(--border-color);
     }
 
     .data-table td:last-child {
