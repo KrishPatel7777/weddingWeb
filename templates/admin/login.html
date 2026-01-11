@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Parampara Wedding Planner</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin.css') }}">
-</head>
 <script>
-const togglePassword = document.getElementById("togglePassword");
-const passwordInput = document.getElementById("password");
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const toggleIcon = document.querySelector(".toggle-password");
 
-togglePassword.addEventListener("click", () => {
-    const isPassword = passwordInput.type === "password";
-
-    passwordInput.type = isPassword ? "text" : "password";
-
-    togglePassword.classList.toggle("fa-eye");
-    togglePassword.classList.toggle("fa-eye-slash");
-});
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.textContent = "🙈";
+    } else {
+        passwordInput.type = "password";
+        toggleIcon.textContent = "👁️";
+    }
+}
 </script>
 
+</head>
 <body class="login-page">
     <div class="login-container">
         <div class="login-card">
@@ -49,8 +49,9 @@ togglePassword.addEventListener("click", () => {
                     <label for="password">Password</label>
                     <div class="password-wrapper">
                         <input type="password" id="password" name="password" required>
-
-                        <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+                        <span class="toggle-password" onclick="togglePassword()">
+                            👁️
+                        </span>
                     </div>
                 </div>
                 

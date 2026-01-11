@@ -651,6 +651,7 @@ body {
         max-width: 100%;
     }
 }
+/* Password show/hide */
 .password-wrapper {
     position: relative;
 }
@@ -661,12 +662,13 @@ body {
 
 .toggle-password {
     position: absolute;
-    right: 14px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 18px;
     color: var(--text-muted);
+    user-select: none;
     transition: color 0.3s;
 }
 
